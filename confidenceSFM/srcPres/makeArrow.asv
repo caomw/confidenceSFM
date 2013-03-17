@@ -1,0 +1,9 @@
+function [w] = makeArrow(direc,patchSize,fg,bg);
+
+w = bg*ones(patchSize);
+
+if direc==1
+    
+    w(patchSize/4:3*patchSize/4,patchSize/10
+    
+else

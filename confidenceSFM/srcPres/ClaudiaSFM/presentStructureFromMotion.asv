@@ -1,0 +1,89 @@
+% function presentStructureFromMotion(SFM,T)
+% 08 Aug 4 by Nao Tsuchiya
+% present structure from motion stimuli
+%
+% SFM is a structure that contains basic parameters that specify the
+% spatiotemporal parameters for structure from motion
+%
+% T is a structure that specifies parameters that are manipulated in each
+% trial
+% T.direction(1) - rotation direction for top
+% T.direction(2) - rotation direction for bottom
+% T.disparity(1) - disparity for top
+% T.disparity(2) - disparity for top
+
+
+screenNumber = screen('screens');
+[window,windowRect] = SCREEN(screenNumber,'OpenWindow',0,[0, 0, 800, 600]);
+framerate = screen(screenNumber,'framerate');
+
+if SFM.framerate ~= framerate;
+    error(['framerate should be ' num2str(SFM.framerate) 'Hz'])
+end
+
+while kbcheck; end
+while ~kbcheck; end
+
+imgRect1 = fixationXY(1
+
+
+for iTrial = 1:10   
+    iT(iTrial).disparity = [SFM.vDisparity(ceil(rand(1,2)*(SFM.nDisparity))) ];
+    iT(iTrial).direction = [ceil(rand(1,2)*2) ];
+
+    %% top SFM
+    Top = getSFMDotPos(SFM,iT(iTrial).disparity(1),iT(iTrial).direction(1));
+    %% bottom SFM
+    Top = getSFMDotPos(SFM,iT(iTrial).disparity(2),iT(iTrial).direction(2));
+
+    
+    
+    iT(iTrial).startStimTime = getsecs;
+
+    screen(window,'waitBlanking')
+    drawDot(SFM,Top.dotPosXY11 + [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Top.dotPosXY21 + [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Bot.dotPosXY11 - [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Bot.dotPosXY21 - [0 SFM.distFromFixation] ,window)
+    waitsecs(SFM.stimOn);
+
+    screen(window,'waitBlanking')
+    screen(window,'fillRect',0)
+    waitsecs(SFM.stimOff);
+
+    screen(window,'waitBlanking')
+    drawDot(SFM,Top.dotPosXY12 + [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Top.dotPosXY22 + [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Bot.dotPosXY12 - [0 SFM.distFromFixation] ,window)
+    drawDot(SFM,Bot.dotPosXY22 - [0 SFM.distFromFixation] ,window)
+    waitsecs(SFM.stimOn);
+
+    screen(window,'waitBlanking')
+    screen(window,'fillRect',0)
+
+    while 1
+        [keyIsDown, timeSecs, keyCode ] = KbCheck; %whether there is a key pressed
+        if keyIsDown
+            tmp = KbName(keyCode);
+            if iscell(tmp)
+                continue
+            end
+            switch tmp(1)  %several keys pressed together -- read the first one
+                case {'1','2','3','4','5','6'}
+                    iT(iTrial).response = str2num(tmp(1));
+                    iT(iTrial).RT = GetSecs - iT(iTrial).startStimTime;
+                    break
+                case 'q'
+                    asdf
+                    return
+            end
+        end
+        while ~kbcheck; end
+    end
+    disp(['resp=',num2str(iT(iTrial).response),...
+        ' : RT=',num2str(round( iT(iTrial).RT))])
+end
+    asdf
+
+
+  

@@ -1,0 +1,3 @@
+SIG_TGT_ON   = 50;
+SIG_SER_ON   = 10;
+SIG_SER_OFF  = 20;
