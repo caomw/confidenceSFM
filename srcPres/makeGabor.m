@@ -24,3 +24,4 @@ xR   = xM*cos(pi*ori/180)+yM*sin(pi*ori/180);
 grat = sin(2*pi*sf*xR+pha);
 
 w = grat.*env;
+

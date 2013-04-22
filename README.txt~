@@ -1,3 +1,6 @@
+###########################
+Structure from Motion (SFM)
+###########################
 
 dataRaw/ -> contains the behavioural results of the experiment
 
@@ -7,4 +10,7 @@ notes_meetings/  -> contains the parameters and ideas discussed in the meetigns 
 
 srcPres/ -> SCRIPTS TO RUN THE EXPERIMENT:
 
+		- 'initializeScreen.m': sets the default parameters to open the main window for the experiment.
+		- 'setConstants.m' & 'setParamsSFM.m': adjust experimental parameters.
+		- 'SFM_minimum.m': MAIN FILE. Runs the experiment.
 		- 

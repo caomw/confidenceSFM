@@ -31,9 +31,11 @@ dot_textures = zeros(1,SFM.nframe);
 
 clear T
 for iFrame = 1:SFM.nframe
+    
     img1 = blankImg;
     img2 = blankImg;
     img3 = zeros([size(img1),3]);
+    
     if SFM.spinaxis == 1  %horizontal axis (dots move up/down)
         %project and scale x and y positions
         dots.x = dots.xflat*SFM.radius;

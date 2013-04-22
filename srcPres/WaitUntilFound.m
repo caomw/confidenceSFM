@@ -1,4 +1,4 @@
-function [found] = WaitUntilFound(el,x,y,r,minTime,timeOut);
+function [found] = WaitUntilFound(el,x,y,r,minTime,timeOut)
 
 %
 % function [found] = WaitUntilFound(el,x,y,r,minTime,timeOut);
