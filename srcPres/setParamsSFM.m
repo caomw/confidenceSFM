@@ -2,7 +2,7 @@
 % modified 08 Aug 4 by NT
 % set parameters for SFM
 
-SFM.stimOn = 2; % 0.200; % in msec 
+SFM.stimOn = 60; % 0.200; % in msec 
 % SFM.stimOn = 0.200; % in msec 
 % SFM.stimOff = 0.050; % in msec 
 SFM.frameRate = 60; % 100; % 60; 
@@ -17,7 +17,7 @@ SFM.color1 = [150 0 0];
 SFM.color1 = [0 80 0]; 
 SFM.nDots = 200; % 150
 
-SFM.vDisparity = [0.01] ; % potential disparity , 0 for completely ambiguous
+SFM.vDisparity = 0; %0.01 ; % potential disparity , 0 for completely ambiguous
 
 SFM.spinaxis = 2; % 1 for vertical, 2 for horizontal rotation 
 SFM.dispFlag = 1; % 0 for disabling disparity 

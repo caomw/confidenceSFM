@@ -7,8 +7,5 @@ ToDo
 
 Check 'scrFreq'
 
-Changed the definition of the distance to the monitor from pixels to degrees of visual angle
-for all variables
-
 Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 
-even use textures as for dots they are not needed anymore
+even use textures as for dots they are not needed anymore (simply use 'DrawDots')

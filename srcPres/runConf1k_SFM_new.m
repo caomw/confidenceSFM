@@ -52,7 +52,6 @@ if nargin<2
 end
 
 
-
 % desired screen refresh rate
 scrFreq = 120; % Hz
 
@@ -120,7 +119,7 @@ randn('state',seed);
 %
 % warning: if you change number of trials or number of orientations,
 % change here
-if ((length(targetOri)~=12)|(mod(nTrials,length(targetOri)*4)))
+if ((length(targetOri)~=12) || (mod(nTrials,length(targetOri)*4)))
     error('randomization has to be changed for your number of trials');
 end
 

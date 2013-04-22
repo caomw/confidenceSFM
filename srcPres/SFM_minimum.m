@@ -21,8 +21,7 @@ try
     end
     
     % Clear Screen
-    asdf
-    
+%     asdf
     
     %% Initialize screen
     % PsychJavaTrouble; % Check there are no problems with Java
@@ -32,9 +31,7 @@ try
     AssertOpenGL;
     Screen('Preference','SkipSyncTests', Exp.Cfg.SkipSyncTest);
     
-    Exp.Cfg.WinSize= [0 0 1000 750];  %Empty means whole screen
-    xSize =  Exp.Cfg.WinSize(3);
-    ySize =  Exp.Cfg.WinSize(4);
+    Exp.Cfg.WinSize= [0 0 1000 700];  %Empty means whole screen
     Exp.Cfg.WinColor= []; % empty for the middle gray of the screen.
     
     Exp.Cfg.xDimCm = 40; %Length in cm of the screen in X
@@ -42,6 +39,9 @@ try
     Exp.Cfg.distanceCm = 75; %Viewing distance
     
     Exp = initializeScreen (Exp);
+    
+    xSize =  Exp.Cfg.WinSize(3);
+    ySize =  Exp.Cfg.WinSize(4);
     %     [window,rect] = Screen(0,'OpenWindow',lum.black, [0 0 xSize ySize]);
     
     
@@ -271,6 +271,9 @@ try
     %     Screen(window,'DrawText',leftarrow, 100, 100);
     %     Screen(window,'DrawText',rightarrow, 200, 100);
     
+    %% Initialize iView
+%     Exp = init_iView (Exp);
+    
     
     %% MAIN LOOP HERE
     respKey  = nan(1,nTrials);
@@ -399,7 +402,8 @@ try
                 end
                 
                 if 0 % 2013 Mar 11 by NT
-                    eyelink('startrecording');
+                    trialstart = iViewX('message',ivx,['"Trial ' num2str(trial) ' Start"']); %Mark trail start in output file
+%                     eyelink('startrecording');
                 end
                 WaitSecs(0.1);
                 fprintf('recording restarted.\n');
@@ -420,7 +424,8 @@ try
         end
         
         if 0 % 2013 Mar 11 by NT
-            eyelink('message', 'MARKERID %i', SIG_SER_ON);
+            trialstart = iViewX('message',ivx, 'MARKERID %i', SIG_SER_ON);
+%             eyelink('message', 'MARKERID %i', SIG_SER_ON);
         end
         
         %% PRESENT STIMULUS
@@ -469,7 +474,8 @@ try
         end
         Screen(Exp.Cfg.win,'FillRect',lum.black);
         if 0 % 2013 Mar 11 by NT
-            eyelink('message', 'MARKERID %i', SIG_SER_OFF);
+            trialstart = iViewX('message',ivx, 'MARKERID %i', SIG_SER_OFF);
+%             eyelink('message', 'MARKERID %i', SIG_SER_OFF);
         end
         maskOffTime(trial) = GetSecs;
         
@@ -480,7 +486,7 @@ try
             screen('flip',Exp.Cfg.win);
         end
         Screen(Exp.Cfg.win,'TextSize', font1);
-        Screen(Exp.Cfg.win,'DrawText','Front surface going Left [1] or Right [0]: ',300,300,255);
+        Screen(Exp.Cfg.win,'DrawText','Front surface going Left [1] or Right [0]: ', 300, 300, 255);
         %    Screen(Exp.Cfg.win,'DrawText','Counterclockwise [a]/Clockwise[s]: ',300,300,255);
         % 2013 Mar 11 by NT
         screen('flip',Exp.Cfg.win);
@@ -569,7 +575,8 @@ try
         end
     end
        
-    % stop recording
+    %% stop recording & close iView    
+%     close_iView (ivx)
     
     %     fprintf('stop recording...');
     %     eyelink('stoprecording');
@@ -594,6 +601,11 @@ try
     %end
     %fprintf('done.\n');
     
+    % shutdown link
+    %fprintf('Eyelink shutdown...');
+    %eyelink('shutdown');
+    %fprintf('done.\n');
+    
     % close all on and off Screens
     Screen('CloseAll');
     
@@ -606,12 +618,7 @@ try
     % Show Mouse pointer
     ShowCursor;
     
-    % shutdown link
-    %fprintf('Eyelink shutdown...');
-    %eyelink('shutdown');
-    %fprintf('done.\n');
- 
-    
+       
     
 catch ME1
     rethrow(ME1)

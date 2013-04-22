@@ -1,4 +1,4 @@
-function [] = initEL1000(filename);
+function [] = initEL1000(filename)
 
 % open link
 if ~eyelink('isconnected');
@@ -7,7 +7,7 @@ end
 
 
 status = eyelink('openfile', filename);
-if status~=0
+if status ~= 0
 	eyelink('Shutdown');
     clear mex;
 	error(sprintf('Cannot create %s (error: %d)- eyelink shutdown', status,filename));
