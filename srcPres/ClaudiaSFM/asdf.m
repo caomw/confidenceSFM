@@ -1,2 +1,0 @@
-function asdf
-clear screen 
