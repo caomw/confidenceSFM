@@ -41,12 +41,19 @@ try
     
     xSize =  Exp.Cfg.WinSize(3);
     ySize =  Exp.Cfg.WinSize(4);
-   
+    %     [window,rect] = Screen(0,'OpenWindow',lum.black, [0 0 xSize ySize]);
+    
     
     %% Define Parameters
     
     % global constants
     setConstants;
+    
+    % desired screen size -- change as necessary
+    % xSize = 1366;
+    % ySize = 768;
+    % xSize = 1024;
+    % ySize = 768;
     
     % setParamsAM
     setParamsSFM
@@ -112,6 +119,7 @@ try
     % Set experiment paths
     [Exp, filename] = setPaths(Exp);
     
+    
     % Initialize random number generators to subject dependent reconstructible
     % values
     seed = 1e5*sessionNum+100*subjectID(1)+subjectID(2);
@@ -123,7 +131,7 @@ try
     %
     % warning: if you change number of trials or number of orientations,
     % change here
-    if ( (length(targetOri) ~= 12) || ( mod(nTrials, length(targetOri) * 4)) )
+    if ((length(targetOri)~=12) || (mod(nTrials,length(targetOri)*4)))
         error('randomization has to be changed for your number of trials');
     end
     
@@ -153,7 +161,8 @@ try
     
     arrowIdx(find(cueCorrect))  = locIdx(find(cueCorrect));
     arrowIdx(find(~cueCorrect)) = 3-locIdx(find(~cueCorrect));
-        
+    
+    
     SFM.imgRect = [ Exp.Cfg.windowRect(3)/2 - SFM.imgSize/2 ,...
         Exp.Cfg.windowRect(4)/2 - SFM.imgSize/2,...
         Exp.Cfg.windowRect(3)/2 + SFM.imgSize/2,...
@@ -162,7 +171,18 @@ try
     imgRectTop = SFM.imgRect + [ 0 1 0 1] * SFM.distFromFixation;
     imgRectBot = SFM.imgRect - [ 0 1 0 1] * SFM.distFromFixation;
     
-          
+    
+    %% verify screen refresh rate (this is done internally by Psychtoolbox)
+    % t0_test = GetSecs;
+    % if 0 % 13 Mar 11 by NT
+    %     Screen(Exp.Cfg.win,'WaitBlanking',10);
+    %     t1_test = GetSecs;
+    %     if abs((t1_test-t0_test)/10-1/scrFreq)>1/scrFreq;
+    %         Screen('CloseAll');
+    %         error(sprintf('Screen rate must be within 10%% of %3.3dHz',scrFreq));
+    %     end
+    % end
+    
     % verify resoultion (What is this check for?)
     if any( Exp.Cfg.windowRect ~= [0 0 xSize ySize])
         Screen('CloseAll');
@@ -219,15 +239,12 @@ try
     
     %     leftarrow='<--';
     %     rightarrow='-->';
+    %
     %     Screen(window,'DrawText',leftarrow, 100, 100);
     %     Screen(window,'DrawText',rightarrow, 200, 100);
     
-    
-    
     %% Initialize iView
-    if SFM.trackEye
-        Exp = init_iView (Exp);
-    end
+    %     Exp = init_iView (Exp);
     
     
     %% MAIN LOOP HERE
@@ -237,13 +254,12 @@ try
     trialStarted = zeros(1,nTrials);
     arrowTime = nan(1,nTrials);
     tgtOnTime = nan(1,nTrials);
-%     maskOnTime = nan(1,nTrials);
+    maskOnTime = nan(1,nTrials);
     maskOffTime = nan(1,nTrials);
     
     iT(nTrials).disparity = [];
     iT(nTrials).direction = [];
     iT(nTrials).respType = [];
-    
     
     for trial = 1 : nTrials
         

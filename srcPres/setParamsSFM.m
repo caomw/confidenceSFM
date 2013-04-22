@@ -2,6 +2,8 @@
 % modified 08 Aug 4 by NT
 % set parameters for SFM
 
+SFM.trackEye = 0;
+
 SFM.stimOn = 60; % 0.200; % in msec 
 % SFM.stimOn = 0.200; % in msec 
 % SFM.stimOff = 0.050; % in msec 
