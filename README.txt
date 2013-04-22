@@ -7,4 +7,5 @@ notes_meetings/  -> contains the parameters and ideas discussed in the meetigns 
 
 srcPres/ -> SCRIPTS TO RUN THE EXPERIMENT:
 
-		1- 
+		- setConstants.m & setParamsSFM.m : adjust experiment parameters
+		-
