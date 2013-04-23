@@ -1,10 +1,10 @@
-function SFM_minimum
+function SFM
 
 
 %% modified by NT 13 Mar 11
 % based on runConf_1k_SFM_new, which contains commands related to
 % communication with eyelink.
-%
+
 % Goals
 % 1. to present SFM stimuli to parkinson's disease patient.
 % - preliminary studies show that their percept switches very quickly
@@ -12,6 +12,10 @@ function SFM_minimum
 % or, by interleaved presentation, which might elicit stronger OKN at the
 % onset of the stimuli.
 
+% Pre-requisites:
+% Add Psychophysics/ to the path to use 'initializeScreen.m'
+
+% Parameters 
 % SFM is a structure that contains basic parameters that specify the
 % spatiotemporal parameters for structure from motion
 %
@@ -50,9 +54,12 @@ try
     
     Exp = initializeScreen (Exp);
     
-    xSize =  Exp.Cfg.WinSize(3);
-    ySize =  Exp.Cfg.WinSize(4);
+%     xSize =  Exp.Cfg.WinSize(3);
+%     ySize =  Exp.Cfg.WinSize(4);
     
+    % Add to the path the files to communicate with the eye tracker
+    addpath('../iViewXNao/');
+    addpath('/aux_files/');
     
     %% Define Parameters
     
@@ -162,33 +169,33 @@ try
     locIdx  = (rand(1,nTrials)>0.5)+1;
     
     
-    arrowIdx(find(cueCorrect))  = locIdx(find(cueCorrect));
-    arrowIdx(find(~cueCorrect)) = 3-locIdx(find(~cueCorrect));
+%     arrowIdx(find(cueCorrect))  = locIdx(find(cueCorrect));
+%     arrowIdx(find(~cueCorrect)) = 3-locIdx(find(~cueCorrect));
     
     SFM.imgRect = [ Exp.Cfg.windowRect(3)/2 - SFM.imgSize/2 ,...
         Exp.Cfg.windowRect(4)/2 - SFM.imgSize/2,...
         Exp.Cfg.windowRect(3)/2 + SFM.imgSize/2,...
         Exp.Cfg.windowRect(4)/2 + SFM.imgSize/2];
     
-    imgRectTop = SFM.imgRect + [ 0 1 0 1] * SFM.distFromFixation;
-    imgRectBot = SFM.imgRect - [ 0 1 0 1] * SFM.distFromFixation;
+%     imgRectTop = SFM.imgRect + [ 0 1 0 1] * SFM.distFromFixation;
+%     imgRectBot = SFM.imgRect - [ 0 1 0 1] * SFM.distFromFixation;
     
     
-    % verify resoultion (What is this check for?)
-    if any( Exp.Cfg.windowRect ~= [0 0 xSize ySize])
-        Screen('CloseAll');
-        error('Screen Resoultion must be x=%d, y=%d', xSize, ySize');
-    end
+%     % verify resoultion (What is this check for?)
+%     if any( Exp.Cfg.windowRect ~= [0 0 xSize ySize])
+%         Screen('CloseAll');
+%         error('Screen Resoultion must be x=%d, y=%d', xSize, ySize');
+%     end
     
     Screen(Exp.Cfg.win, 'DrawText', 'Preparing session, please wait.',400,300,lum.text);
     Screen('Flip', Exp.Cfg.win,  [], Exp.Cfg.AuxBuffers);
     
     %cross
-    %     [Wcross, WcrossRect]=Screen(Exp.Cfg.win,'OpenOffscreenWindow',lum.black);
-    crect=[0 0 20 20];
-    r1=[0 10 20 10];
-    r2=[10 0 10 20];
-    crossRect = CenterRect(crect, Exp.Cfg.windowRect);
+    % [Wcross, WcrossRect]=Screen(Exp.Cfg.win,'OpenOffscreenWindow',lum.black);
+%     crect=[0 0 20 20];
+%     r1=[0 10 20 10];
+%     r2=[10 0 10 20];
+%     crossRect = CenterRect(crect, Exp.Cfg.windowRect);
     %     crossRect = CenterRect(crect,WcrossRect);
     %     Screen(Wcross,'DrawLine',lum.white,r1(1),r1(2),r1(3),r1(4));%,scalar*1,scalar*1);
     %     Screen(Wcross,'DrawLine',lum.white,r2(1),r2(2),r2(3),r2(4));%,scalar*1,scalar*1);
@@ -392,7 +399,7 @@ try
     
     for trial = 1 : nTrials
         
-        %% prepare a trial
+        % PREPARE EACH TRIAL
         iT(trial).disparity = 0; % [SFM.vDisparity(ceil(rand(1,2)*(SFM.nDisparity))) ];
         iT(trial).direction = round( rand(1) ) * 2 - 1;
         iT(trial).respType = nan(1, SFM.nframe);
