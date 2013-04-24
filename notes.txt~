@@ -3,6 +3,9 @@ Why do we have the checks for the Screen resolution?
 
 ToDo
 
+Combine task with eye tracker (see runConf1k_SFM_new.m). ok. Need to test it.
+Change the code (leopold 2006). Get responses continuously and make responses continuous. (ok)
+
 Check 'scrFreq'
 
 Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 

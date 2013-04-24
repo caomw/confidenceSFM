@@ -3,10 +3,14 @@ Why do we have the checks for the Screen resolution?
 
 ToDo
 
-Combine task with eye tracker (see runConf1k_SFM_new.m)
+Combine task with eye tracker (see runConf1k_SFM_new.m). ok. Need to test it.
 Change the code (leopold 2006). Get responses continuously and make responses continuous. (ok)
+
+Program the different conditions into a trial structure for the current experiment
+
+Program the response screens for subjects now that it is continuous
 
 Check 'scrFreq'
 
 Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 
-even use textures as for dots they are not needed anymore (simply use 'DrawDots')
+even use textures as for dots they are not needed anymore (simply use 'DrawDots').ok

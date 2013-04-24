@@ -1,7 +1,7 @@
 function SFM
 
 
-%% modified by NT 13 Mar 11
+%% Modified by NT 13 Mar 11
 % based on runConf_1k_SFM_new, which contains commands related to
 % communication with eyelink.
 
@@ -15,7 +15,7 @@ function SFM
 % Pre-requisites:
 % Add Psychophysics/ to the path to use 'initializeScreen.m'
 
-% Parameters 
+% Parameters
 % SFM is a structure that contains basic parameters that specify the
 % spatiotemporal parameters for structure from motion
 %
@@ -54,12 +54,9 @@ try
     
     Exp = initializeScreen (Exp);
     
-%     xSize =  Exp.Cfg.WinSize(3);
-%     ySize =  Exp.Cfg.WinSize(4);
-    
-    % Add to the path the files to communicate with the eye tracker
-    addpath('../iViewXNao/');
-    addpath('/aux_files/');
+    %     xSize =  Exp.Cfg.WinSize(3);
+    %     ySize =  Exp.Cfg.WinSize(4);
+        
     
     %% Define Parameters
     
@@ -134,8 +131,7 @@ try
     % values
     seed = 1e5*sessionNum+100*subjectID(1)+subjectID(2);
     rand('state',seed);
-    randn('state',seed);
-    
+    randn('state',seed);    
     
     % generate random order
     %
@@ -169,33 +165,26 @@ try
     locIdx  = (rand(1,nTrials)>0.5)+1;
     
     
-%     arrowIdx(find(cueCorrect))  = locIdx(find(cueCorrect));
-%     arrowIdx(find(~cueCorrect)) = 3-locIdx(find(~cueCorrect));
+    %     arrowIdx(find(cueCorrect))  = locIdx(find(cueCorrect));
+    %     arrowIdx(find(~cueCorrect)) = 3-locIdx(find(~cueCorrect));
     
     SFM.imgRect = [ Exp.Cfg.windowRect(3)/2 - SFM.imgSize/2 ,...
         Exp.Cfg.windowRect(4)/2 - SFM.imgSize/2,...
         Exp.Cfg.windowRect(3)/2 + SFM.imgSize/2,...
         Exp.Cfg.windowRect(4)/2 + SFM.imgSize/2];
     
-%     imgRectTop = SFM.imgRect + [ 0 1 0 1] * SFM.distFromFixation;
-%     imgRectBot = SFM.imgRect - [ 0 1 0 1] * SFM.distFromFixation;
-    
-    
-%     % verify resoultion (What is this check for?)
-%     if any( Exp.Cfg.windowRect ~= [0 0 xSize ySize])
-%         Screen('CloseAll');
-%         error('Screen Resoultion must be x=%d, y=%d', xSize, ySize');
-%     end
+    %     imgRectTop = SFM.imgRect + [ 0 1 0 1] * SFM.distFromFixation;
+    %     imgRectBot = SFM.imgRect - [ 0 1 0 1] * SFM.distFromFixation;
     
     Screen(Exp.Cfg.win, 'DrawText', 'Preparing session, please wait.',400,300,lum.text);
     Screen('Flip', Exp.Cfg.win,  [], Exp.Cfg.AuxBuffers);
     
     %cross
     % [Wcross, WcrossRect]=Screen(Exp.Cfg.win,'OpenOffscreenWindow',lum.black);
-%     crect=[0 0 20 20];
-%     r1=[0 10 20 10];
-%     r2=[10 0 10 20];
-%     crossRect = CenterRect(crect, Exp.Cfg.windowRect);
+    %     crect=[0 0 20 20];
+    %     r1=[0 10 20 10];
+    %     r2=[10 0 10 20];
+    %     crossRect = CenterRect(crect, Exp.Cfg.windowRect);
     %     crossRect = CenterRect(crect,WcrossRect);
     %     Screen(Wcross,'DrawLine',lum.white,r1(1),r1(2),r1(3),r1(4));%,scalar*1,scalar*1);
     %     Screen(Wcross,'DrawLine',lum.white,r2(1),r2(2),r2(3),r2(4));%,scalar*1,scalar*1);
@@ -238,9 +227,7 @@ try
     %     leftarrow='<--';
     %     rightarrow='-->';
     %     Screen(window,'DrawText',leftarrow, 100, 100);
-    %     Screen(window,'DrawText',rightarrow, 200, 100);
-    
-    
+    %     Screen(window,'DrawText',rightarrow, 200, 100);    
     
     %% Initialize iView
     if SFM.trackEye
@@ -261,141 +248,15 @@ try
     
     iT(nTrials).disparity = [];
     iT(nTrials).direction = [];
-    iT(nTrials).respType = [];
-    
-    
-    %         arrow2Idx(trial) = locIdx(trial);
-    %         arrow2locIdx(trial) = locIdx(trial);
-    %
-    %         if locIdx(trial) == 1
-    %             locIdxdummy(trial) = 2;
-    %         else
-    %             locIdxdummy(trial) = 1;
-    %         end
-    %
-    %
-    %         % iT(trial).disparity = [0.01 0.01]; % [SFM.vDisparity(ceil(rand(1,2)*(SFM.nDisparity))) ];
-    %         % iT(trial).direction = [-1 1]; %[round(rand(1,2))*2-1];
-    %
-    %         %% top SFM
-    %         dot_textures = getSFMDotPos(SFM, iT(trial).disparity(1), iT(trial).direction(1), Exp.Cfg.win);
-    %
-    %         %% bottom SFM
-    %         % Bot = getSFMDotPos(SFM,iT(trial).disparity(2),iT(trial).direction(2),Exp.Cfg.win);
-    %
-    %         %    try
-    %
-    %
-    %         % 13 Mar 11 by NT
-    %         if 0
-    %             Screen(Exp.Cfg.win,'FillRect',lum.black);
-    %             Screen(Exp.Cfg.win,'TextSize', font1);
-    %             Screen(Exp.Cfg.win,'DrawText',...
-    %                 sprintf('Press any key to start trial %3.3d/%3.3d',trial,nTrials),...
-    %                 350,390,lum.white);
-    %             % 13 Mar 11 by NT
-    %             Screen('flip',Exp.Cfg.win');
-    %         end
-    %         % 13 Mar 11 by NT
-    %         if 0
-    %             keyP = 0;
-    %             while ~keyP
-    %                 [keyP,dummy,keyC] = KbCheck;
-    %             end
-    %         else
-    %             [keyP,dummy,keyC] = KbCheck;
-    %         end
-    %
-    %         % ESCAPE KEY
-    %         if strcmpi(KbName(keyC), Exp.addParams.escapeKey)
-    %             % esc was pressed
-    %             save(sprintf('%s_ESC',fileName));
-    %             %             Screen('CloseAll');
-    %             ShowCursor;
-    %             %             eyelink('closefile');
-    %             %             eyelink('shutdown');
-    %             warning('Esc pressed, experiment ended.');
-    %             %             keyboard;
-    %             break;
-    %         end
-    %
-    %         % 13 Mar 11 by NT
-    %         if 0
-    %             while KbCheck end
-    %         end
-    %
-    %         found = 0;
-    %         while ~found
-    %             Screen('FillRect', Exp.Cfg.win, lum.black);
-    %             arrowTime(trial) = GetSecs;
-    %             if 0 % 2013 Mar 11 by NT
-    %                 Screen(Exp.Cfg.win,'WaitBlanking',1);
-    %             else
-    %                 screen('flip',Exp.Cfg.win);
-    %             end
-    %
-    %             % Screen('CopyWindow',target{locIdx(trial),tiltIdx(trial),sfIdx(trial)},Exp.Cfg.win,[],rectLoc{locIdx(trial)});
-    %             Screen('CopyWindow',arrow_inv{arrow2Idx(trial)},Exp.Cfg.win,[],arrowLoc{arrow2locIdx(trial)}); %, rectLoc{locIdx(trial)});
-    %             Screen(Exp.Cfg.win,'TextSize', font2);
-    %             if 0  % 13 Mar 11 by NT
-    %                 Screen(Exp.Cfg.win,'DrawText',...
-    %                     sprintf('+',trial,nTrials),...
-    %                     499,396,255);
-    %             end
-    %             %Screen(Exp.Cfg.win,'WaitBlanking',arrowDur);
-    %             % Screen(Exp.Cfg.win,'FillRect',lum.black);
-    %             trialStarted(trial) = trialStarted(trial) + 1;
-    %             startTime(trial) = GetSecs;
-    %             if 0 % 2013 Mar 11 by NT
-    %                 eyelink('message', 'MARKERID %i - %i', SIG_TGT_ON,trialStarted(trial));
-    %                 found = WaitUntilFound(el,512,384,72,0.5,5);
-    %             else
-    %                 found = 1;
-    %             end
-    %
-    %             if ~found
-    %                 Screen(Exp.Cfg.win,'WaitBlanking',1);
-    %                 Screen(Exp.Cfg.win,'FillRect',lum.black);
-    %
-    %                 fprintf('Drift correction...');
-    %                 eyelink('stoprecording');
-    %                 WaitSecs(0.1);
-    %                 if 0 % 2013 Mar 11 by NT
-    %                     status = dodriftcorrection(el,1024/2,768/2,1,1);
-    %                 end
-    %                 if status~=1
-    %                     fprintf('failed (%3.3d).\n',status);
-    %                 else
-    %                     fprintf('done (ok).\n');
-    %                 end
-    %
-    %                 if 0 % 2013 Mar 11 by NT
-    %                     trialstart = iViewX('message',ivx,['"Trial ' num2str(trial) ' Start"']); %Mark trail start in output file
-    %                     %                     eyelink('startrecording');
-    %                 end
-    %                 WaitSecs(0.1);
-    %                 fprintf('recording restarted.\n');
-    %             end
-    %
-    %         end
-    %
-    %         if trial == 1
-    %             tgtOnTime(trial) = GetSecs;
-    %         else
-    %
-    %             while 1
-    %                 tgtOnTime(trial) = GetSecs;
-    %                 if tgtOnTime(trial) - tgtOnTime(trial-1) > 5
-    %                     break
-    %                 end
-    %             end
-    %         end
-    
+    iT(nTrials).respType = [];    
     
     % Set random initial position of dots
     nDots = SFM.nDots;
     dots.xflat(1:nDots) = (rand(nDots,1)-.5)*2;
     dots.yflat(1:nDots) = (rand(nDots,1)-.5)*2;
+    
+    frames
+    
     
     for trial = 1 : nTrials
         
@@ -559,7 +420,7 @@ try
         % fprintf('Closing file...');
         % eyelink('closefile');
         % fprintf('done.\n');
-    end   
+    end
     
     
     % transfer data
@@ -601,7 +462,13 @@ end
 
 function [Exp, fileName, ELName, sessionNum] = setPaths(Exp, subjectID)
 
+
 if  Exp.Cfg.computer.windows == 1
+    
+    % Add to the path the files to communicate with the eye tracker
+    addpath('..\iViewXNao\');
+    addpath('\aux_files\');
+    
     if ~exist(sprintf('..\\dataRaw\\%s\\',subjectID));
         mkdir(sprintf('..\\dataRaw\\%s\\',subjectID));
     end
@@ -615,6 +482,12 @@ if  Exp.Cfg.computer.windows == 1
     ELName   = sprintf('%s%3.3d.edf',subjectID,sessionNum);
     
 elseif Exp.Cfg.computer.linux == 1 || Exp.Cfg.computer.osx == 1
+    
+    % Add to the path the files to communicate with the eye tracker
+    addpath('../iViewXNao/');
+    addpath('/aux_files/');
+    
+    
     if ~exist(sprintf('../dataRaw/%s/',subjectID));
         mkdir(sprintf('../dataRaw/%s/',subjectID));
     end
@@ -628,10 +501,12 @@ elseif Exp.Cfg.computer.linux == 1 || Exp.Cfg.computer.osx == 1
     ELName   = sprintf('%s%3.3d.edf',subjectID,sessionNum);
 end
 
+
 function [] = waitForKey
 
 while ~KbCheck end
 while KbCheck end
+
 
 function [] = waitFor(charN)
 
@@ -656,5 +531,141 @@ end
 
 
 
+%% Old stuff
 
+    
+    %     % verify resoultion (What is this check for?)
+    %     if any( Exp.Cfg.windowRect ~= [0 0 xSize ySize])
+    %         Screen('CloseAll');
+    %         error('Screen Resoultion must be x=%d, y=%d', xSize, ySize');
+    %     end
+
+
+    %         arrow2Idx(trial) = locIdx(trial);
+    %         arrow2locIdx(trial) = locIdx(trial);
+    %
+    %         if locIdx(trial) == 1
+    %             locIdxdummy(trial) = 2;
+    %         else
+    %             locIdxdummy(trial) = 1;
+    %         end
+    %
+    %
+    %         % iT(trial).disparity = [0.01 0.01]; % [SFM.vDisparity(ceil(rand(1,2)*(SFM.nDisparity))) ];
+    %         % iT(trial).direction = [-1 1]; %[round(rand(1,2))*2-1];
+    %
+    %         %% top SFM
+    %         dot_textures = getSFMDotPos(SFM, iT(trial).disparity(1), iT(trial).direction(1), Exp.Cfg.win);
+    %
+    %         %% bottom SFM
+    %         % Bot = getSFMDotPos(SFM,iT(trial).disparity(2),iT(trial).direction(2),Exp.Cfg.win);
+    %
+    %         %    try
+    %
+    %
+    %         % 13 Mar 11 by NT
+    %         if 0
+    %             Screen(Exp.Cfg.win,'FillRect',lum.black);
+    %             Screen(Exp.Cfg.win,'TextSize', font1);
+    %             Screen(Exp.Cfg.win,'DrawText',...
+    %                 sprintf('Press any key to start trial %3.3d/%3.3d',trial,nTrials),...
+    %                 350,390,lum.white);
+    %             % 13 Mar 11 by NT
+    %             Screen('flip',Exp.Cfg.win');
+    %         end
+    %         % 13 Mar 11 by NT
+    %         if 0
+    %             keyP = 0;
+    %             while ~keyP
+    %                 [keyP,dummy,keyC] = KbCheck;
+    %             end
+    %         else
+    %             [keyP,dummy,keyC] = KbCheck;
+    %         end
+    %
+    %         % ESCAPE KEY
+    %         if strcmpi(KbName(keyC), Exp.addParams.escapeKey)
+    %             % esc was pressed
+    %             save(sprintf('%s_ESC',fileName));
+    %             %             Screen('CloseAll');
+    %             ShowCursor;
+    %             %             eyelink('closefile');
+    %             %             eyelink('shutdown');
+    %             warning('Esc pressed, experiment ended.');
+    %             %             keyboard;
+    %             break;
+    %         end
+    %
+    %         % 13 Mar 11 by NT
+    %         if 0
+    %             while KbCheck end
+    %         end
+    %
+    %         found = 0;
+    %         while ~found
+    %             Screen('FillRect', Exp.Cfg.win, lum.black);
+    %             arrowTime(trial) = GetSecs;
+    %             if 0 % 2013 Mar 11 by NT
+    %                 Screen(Exp.Cfg.win,'WaitBlanking',1);
+    %             else
+    %                 screen('flip',Exp.Cfg.win);
+    %             end
+    %
+    %             % Screen('CopyWindow',target{locIdx(trial),tiltIdx(trial),sfIdx(trial)},Exp.Cfg.win,[],rectLoc{locIdx(trial)});
+    %             Screen('CopyWindow',arrow_inv{arrow2Idx(trial)},Exp.Cfg.win,[],arrowLoc{arrow2locIdx(trial)}); %, rectLoc{locIdx(trial)});
+    %             Screen(Exp.Cfg.win,'TextSize', font2);
+    %             if 0  % 13 Mar 11 by NT
+    %                 Screen(Exp.Cfg.win,'DrawText',...
+    %                     sprintf('+',trial,nTrials),...
+    %                     499,396,255);
+    %             end
+    %             %Screen(Exp.Cfg.win,'WaitBlanking',arrowDur);
+    %             % Screen(Exp.Cfg.win,'FillRect',lum.black);
+    %             trialStarted(trial) = trialStarted(trial) + 1;
+    %             startTime(trial) = GetSecs;
+    %             if 0 % 2013 Mar 11 by NT
+    %                 eyelink('message', 'MARKERID %i - %i', SIG_TGT_ON,trialStarted(trial));
+    %                 found = WaitUntilFound(el,512,384,72,0.5,5);
+    %             else
+    %                 found = 1;
+    %             end
+    %
+    %             if ~found
+    %                 Screen(Exp.Cfg.win,'WaitBlanking',1);
+    %                 Screen(Exp.Cfg.win,'FillRect',lum.black);
+    %
+    %                 fprintf('Drift correction...');
+    %                 eyelink('stoprecording');
+    %                 WaitSecs(0.1);
+    %                 if 0 % 2013 Mar 11 by NT
+    %                     status = dodriftcorrection(el,1024/2,768/2,1,1);
+    %                 end
+    %                 if status~=1
+    %                     fprintf('failed (%3.3d).\n',status);
+    %                 else
+    %                     fprintf('done (ok).\n');
+    %                 end
+    %
+    %                 if 0 % 2013 Mar 11 by NT
+    %                     trialstart = iViewX('message',ivx,['"Trial ' num2str(trial) ' Start"']); %Mark trail start in output file
+    %                     %                     eyelink('startrecording');
+    %                 end
+    %                 WaitSecs(0.1);
+    %                 fprintf('recording restarted.\n');
+    %             end
+    %
+    %         end
+    %
+    %         if trial == 1
+    %             tgtOnTime(trial) = GetSecs;
+    %         else
+    %
+    %             while 1
+    %                 tgtOnTime(trial) = GetSecs;
+    %                 if tgtOnTime(trial) - tgtOnTime(trial-1) > 5
+    %                     break
+    %                 end
+    %             end
+    %         end
+    
 
