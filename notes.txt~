@@ -3,10 +3,20 @@ Why do we have the checks for the Screen resolution?
 
 ToDo
 
-Combine task with eye tracker (see runConf1k_SFM_new.m). ok. Need to test it.
-Change the code (leopold 2006). Get responses continuously and make responses continuous. (ok)
+- Combine task with eye tracker. Need to test it. ok
+
+- Ask for the subject Name ID. ok
+- Program the different sessions. Program the different conditions into a trial structure for the current experiment. ok
+- Randomize the order of presentation of the blocks.
+- Change the code (leopold 2006). Get responses continuously and make responses continuous. To check
+- Define better the triggers we are going to use.
+- Program the response screens for subjects now that it is continuous. ok
+- Save all responses and data into one single file.
+- check that we are saving all data to disk and to the eyelink
+- check the calibration commands in case the subject moves his/her head.
+
 
 Check 'scrFreq'
 
 Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 
-even use textures as for dots they are not needed anymore (simply use 'DrawDots')
+even use textures as for dots they are not needed anymore (simply use 'DrawDots').ok

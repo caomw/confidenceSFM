@@ -12,4 +12,4 @@ srcPres/ -> SCRIPTS TO RUN THE EXPERIMENT:
 
 		- 'initializeScreen.m': sets the default parameters to open the main window for the experiment.
 		- 'setConstants.m' & 'setParamsSFM.m': adjust experimental parameters.
-		- 'SFM.m': MAIN FILE. Runs the experiment.
+		- 'run_SFM.m': MAIN FILE. Runs the experiment.

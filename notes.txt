@@ -3,14 +3,37 @@ Why do we have the checks for the Screen resolution?
 
 ToDo
 
-Combine task with eye tracker (see runConf1k_SFM_new.m). ok. Need to test it.
-Change the code (leopold 2006). Get responses continuously and make responses continuous. (ok)
+- Check that we are saving all data to disk and to the iView. CHECK THE ANALYSIS
+- Get responses continuously and make responses continuous. CHECK
+- check the calibration commands in case the subject moves his/her head. CHECK
 
-Program the different conditions into a trial structure for the current experiment
+- Correct the distance to the monitor and the monitor dimension. OK
+- Check these parameters in the initialization files of the iVIew. OK
 
-Program the response screens for subjects now that it is continuous
+- Program the different sessions. Program the different conditions into a trial structure for the current experiment. OK
+- Randomize the order of presentation of the blocks. OK
+
+- See the Desktop compositor error message, OK
+
+- Add specific button after the block. OK
+- Add fixation dot and move stimulus to the middle of the screen. 
+
+- Check the files extension: careful with repeated files as it does not overwrite files on disk
+
 
 Check 'scrFreq'
 
 Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 
 even use textures as for dots they are not needed anymore (simply use 'DrawDots').ok
+
+
+PARAMETERS:
+
+
+
+TRIGGERS:
+
+'Start_Run n'
+'Start_BK 1-5'
+'Start_TR'
+'End_TR'

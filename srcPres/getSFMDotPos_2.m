@@ -21,7 +21,7 @@ dotY = dotY(:)';
 
 % blankImg = zeros(SFM.imgSize);
 
-dotBuffer = SFM.dotSize / 2 / SFM.pixPerDeg ;
+dotBuffer = SFM.dotSize / 2 / Exp.Cfg.pixelsPerDegree ;
 radius = SFM.radius-dotBuffer ;
 
 % img1 = blankImg;
@@ -41,10 +41,10 @@ if SFM.spinaxis == 1  %horizontal axis (dots move up/down)
     goodDotsD = find(dots.xdisp<(radius) & dots.xdisp>-(radius) & dots.y<(radius) & dots.y>-(radius));
     
     %put the dots in the image
-    xx1 = repmat(round((dots.x(goodDots)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotX,length(goodDots),1);
-    xx2 = repmat(round((dots.xdisp(goodDotsD)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotX,length(goodDotsD),1);
-    yy1 = repmat(round((dots.y(goodDots)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotY,length(goodDots),1);
-    yy2 = repmat(round((dots.y(goodDotsD)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotY,length(goodDotsD),1);
+    xx1 = repmat(round((dots.x(goodDots)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotX,length(goodDots),1);
+    xx2 = repmat(round((dots.xdisp(goodDotsD)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotX,length(goodDotsD),1);
+    yy1 = repmat(round((dots.y(goodDots)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotY,length(goodDots),1);
+    yy2 = repmat(round((dots.y(goodDotsD)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotY,length(goodDotsD),1);
     
 %     img1((xx1(:))*SFM.imgSize+yy1(:)) = 1 ;
 %     img2((xx2(:))*SFM.imgSize+yy2(:)) = 1 ;
@@ -71,19 +71,19 @@ elseif SFM.spinaxis == 2   %vertical axis (dots move left/right)
     goodDotsD = find(dots.xdisp<(radius) & dots.xdisp>-(radius) & dots.y<(radius) & dots.y>-(radius));
     
     %put the dots in the image
-    xx1 = repmat(round( (dots.x(goodDots)'+SFM.radius)*SFM.pixPerDeg  ) ,1,nPix ) + repmat(dotX,length(goodDots),1);
-    xx2 = repmat(round((dots.xdisp(goodDotsD)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotX,length(goodDotsD),1);
+    xx1 = repmat(round( (dots.x(goodDots)'+SFM.radius)*Exp.Cfg.pixelsPerDegree  ) ,1,nPix ) + repmat(dotX,length(goodDots),1);
+    xx2 = repmat(round((dots.xdisp(goodDotsD)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotX,length(goodDotsD),1);
     
-%     xx1 = (dots.x(goodDots)' + SFM.radius) * SFM.pixPerDeg; 
-    xx2 = (dots.xdisp(goodDotsD)' + SFM.radius) * SFM.pixPerDeg + ...
-        Exp.Cfg.centerX - (( SFM.radius * SFM.pixPerDeg ) / 2) ;
+%     xx1 = (dots.x(goodDots)' + SFM.radius) * Exp.Cfg.pixelsPerDegree; 
+    xx2 = (dots.xdisp(goodDotsD)' + SFM.radius) * Exp.Cfg.pixelsPerDegree + ...
+        Exp.Cfg.centerX - 150 - (( SFM.radius * Exp.Cfg.pixelsPerDegree ) / 2) ;
     
-%     yy1 = repmat(round((dots.y(goodDots)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotY,length(goodDots),1);
-%     yy2 = repmat(round((dots.y(goodDotsD)'+SFM.radius)*SFM.pixPerDeg),1,nPix) + repmat(dotY,length(goodDotsD),1);
+%     yy1 = repmat(round((dots.y(goodDots)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotY,length(goodDots),1);
+%     yy2 = repmat(round((dots.y(goodDotsD)'+SFM.radius)*Exp.Cfg.pixelsPerDegree),1,nPix) + repmat(dotY,length(goodDotsD),1);
     
-%     yy1 = (dots.y(goodDots)'+SFM.radius)*SFM.pixPerDeg);
-    yy2 = (dots.y(goodDotsD)' + SFM.radius) * SFM.pixPerDeg + ...
-        Exp.Cfg.centerY - (( SFM.radius * SFM.pixPerDeg ) / 2) ;
+%     yy1 = (dots.y(goodDots)'+SFM.radius)*Exp.Cfg.pixelsPerDegree);
+    yy2 = (dots.y(goodDotsD)' + SFM.radius) * Exp.Cfg.pixelsPerDegree + ...
+        Exp.Cfg.centerY - 150 - (( SFM.radius * Exp.Cfg.pixelsPerDegree ) / 2) ;
      
 %     img1( ( xx1(:)) * SFM.imgSize + yy1(:) ) = 1 ;
 %     img2( (xx2(:)) * SFM.imgSize + yy2(:) ) = 1 ;
@@ -95,7 +95,7 @@ elseif SFM.spinaxis == 2   %vertical axis (dots move left/right)
 %     end
     
     % move the dots
-    dots.xflat = dots.xflat+ 2*SFM.degPerSec/360/SFM.frameRate * direction;
+    dots.xflat = dots.xflat+ 2* SFM.degPerSec / 360 / SFM.frameRate * direction;
 end
 
 
