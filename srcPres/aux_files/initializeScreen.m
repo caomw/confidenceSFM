@@ -179,7 +179,7 @@ elseif Exp.Cfg.computer.osx == 1
     
     Exp.addParams.escapeKey = 'ESCAPE';
     Exp.addParams.exitKey = 'o'; %88 in Windows, 67 in MAC
-    Exp.addParams.responseKey = 'Space';
+    Exp.addParams.responseKey = 'space';
     Exp.addParams.upKey = 'UpArrow'; %38 in Windows, 82 in MAC
     Exp.addParams.downKey = 'DownArrow'; %40 in Windows, 81 in MAC
     Exp.addParams.leftKey = 'LeftArrow';

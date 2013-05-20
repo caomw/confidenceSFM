@@ -1,9 +1,0 @@
-
-Why do we have the checks for the Screen resolution?
-
-ToDo
-
-Check 'scrFreq'
-
-Changed from the old psychtoolbox to the new version using textures. Indeed, we shouldn't 
-even use textures as for dots they are not needed anymore (simply use 'DrawDots')
