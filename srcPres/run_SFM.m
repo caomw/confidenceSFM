@@ -272,7 +272,8 @@ try
         
         % TAKE A PAUSE IN BETWEEN RUNS
         Screen('FillRect',  Exp.Cfg.win, Exp.Cfg.Color.black);
-        Screen(Exp.Cfg.win, 'DrawText', 'End of Run, take a pause.', Exp.Cfg.centerX - 300, Exp.Cfg.centerY, Exp.Cfg.Color.white);
+        message = ['End of Run ' num2str(rn) 'of ' num2str(rn) ', take a pause.'];
+        Screen(Exp.Cfg.win, 'DrawText', message, Exp.Cfg.centerX - 300, Exp.Cfg.centerY, Exp.Cfg.Color.white);
         Screen('flip',Exp.Cfg.win);
         if Exp.SFM.trackEye 
             [~, Exp.ivx] = iViewX('closeconnection', Exp.ivx);
