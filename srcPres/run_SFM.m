@@ -264,9 +264,9 @@ try
             
         end
         
-        % Trigger the beginning of the block
+        % Trigger the end of the run
         if Exp.SFM.trackEye
-            runEnd = iViewX('message', Exp.ivx, ['END_RUN_' num2str(rn)]);
+            runEnd = iViewX('message', Exp.ivx, ['END_RUN_' num2str(Exp.rnd_idxs(rn))]);
         end
         
         
