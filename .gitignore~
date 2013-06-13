@@ -1,3 +1,4 @@
 iViewXNao/
 papers/
-dataRaw/
+*.idf
+*~
