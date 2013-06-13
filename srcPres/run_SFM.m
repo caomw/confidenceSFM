@@ -274,6 +274,7 @@ try
         Screen('FillRect',  Exp.Cfg.win, Exp.Cfg.Color.black);
         message = ['End of Run ' num2str(rn) 'of ' num2str(rn) ', take a pause.'];
         Screen(Exp.Cfg.win, 'DrawText', message, Exp.Cfg.centerX - 300, Exp.Cfg.centerY, Exp.Cfg.Color.white);
+
         Screen('flip',Exp.Cfg.win);
         if Exp.SFM.trackEye 
             [~, Exp.ivx] = iViewX('closeconnection', Exp.ivx);
