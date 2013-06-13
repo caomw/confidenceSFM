@@ -104,7 +104,7 @@ try
     Exp.SFM.dispFlag = 1; % 0 for disabling disparity
     
     Exp.SFM.radius = 5.5;  %degrees
-%     Exp.SFM.pixPerDeg = 30; % roughly
+    Exp.SFM.pixPerDeg = 30; % roughly
     Exp.SFM.imgSize = round(Exp.Cfg.pixelsPerDegree*Exp.SFM.radius*2)+(Exp.SFM.dotSize);  %size of one circular patch (plus buffer for dot size)  (in pixels)
     
     Exp.SFM.degPerSec = 50; %deg/sec
@@ -293,15 +293,16 @@ try
         WaitSecs(0.5)
         
         % CALIBRATE EYE TRACKER BEFORE STARTING A NEW RUN
-        if rn ~= runs && Exp.SFM.trackEye 
-            %             [~, Exp.ivx] = iViewX('continuerecording', Exp.ivx);
+        if rn ~= runs && Exp.SFM.trackEye
+%             [~, Exp.ivx] = iViewX('continuerecording', Exp.ivx);
             
-            %             [result, Exp.ivx] = iViewX('checkconnection', Exp.ivx)
+%             [~, Exp.ivx] = iViewX('startrecording', Exp.ivx);
+%             [result, Exp.ivx] = iViewX('receivedata', Exp.ivx)
+% 
+%             [result, Exp.ivx] = iViewX('checkconnection', Exp.ivx)
             
-            [~, Exp.ivx] = iViewX('startrecording', Exp.ivx);
-            % [initstop, ivx] = iViewX('stoprecording', ivx);
-            [~, Exp.ivx] = iViewX('clearbuffer', Exp.ivx);
-            %             [~, Exp.ivx] = iViewX('clearbuffer', Exp.ivx);
+%             [initstop, Exp.ivx] = iViewX('stoprecording', Exp.ivx);
+            
             [~, Exp.ivx] = iViewXCalibration(Exp.ivx);
             % RUN VALIDATION
             [~, Exp.ivx] = iViewXValidation(Exp.ivx);
