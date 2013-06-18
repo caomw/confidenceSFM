@@ -302,18 +302,23 @@ UserEvent	1	281	1409465763	# Message: Validation End
 UserEvent	1	282	1409466307	# Message: START_RUN_9
 UserEvent	1	283	1409466546	# Message: START_BK_1
 UserEvent	1	284	1409482922	# Message: START_TR
+UserEvent	1	285	1469510685	# Message: END_TR
 UserEvent	1	285	1469510685	# Message: END_BK_1
 UserEvent	1	286	1471044678	# Message: START_BK_2
 UserEvent	1	287	1471060013	# Message: START_TR
+UserEvent	1	288	1531087991	# Message: END_TR
 UserEvent	1	288	1531087991	# Message: END_BK_2
 UserEvent	1	289	1532623350	# Message: START_BK_3
 UserEvent	1	290	1532637262	# Message: START_TR
+UserEvent	1	291	1592665148	# Message: END_TR
 UserEvent	1	291	1592665148	# Message: END_BK_3
 UserEvent	1	292	1594203224	# Message: START_BK_4
 UserEvent	1	293	1594215007	# Message: START_TR
+UserEvent	1	294	1654242479	# Message: END_TR
 UserEvent	1	294	1654242479	# Message: END_BK_4
 UserEvent	1	295	1655572823	# Message: START_BK_5
 UserEvent	1	296	1655591739	# Message: START_TR
+UserEvent	1	297	1715619762	# Message: END_TR
 UserEvent	1	297	1715619762	# Message: END_BK_5
 UserEvent	1	298	1716948965	# Message: END_RUN_9
 UserEvent	1	299	1733045273	# Message: Calibration Start
