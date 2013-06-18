@@ -235,6 +235,13 @@ try
                         end
                     end
                 end
+                % Careful here we need to consider the no ITI trials, we
+                % still need to send the trigger
+                if Exp.SFM.trackEye
+                    if Exp.Run(rn).block(blk).interStimInterval == 0
+                        trialstart = iViewX('message', Exp.ivx, 'END_TR');
+                    end
+                end
             end
             
             % Trigger the end of the block
