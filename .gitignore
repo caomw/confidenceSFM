@@ -3,3 +3,4 @@ papers/
 *.idf
 *~
 SFM_papers/
+figures/*
