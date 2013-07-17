@@ -4,10 +4,10 @@ function analysis_collect_eyeData
 % subjects
 
 % Loop through subjects
-data_dir = '../../dataRaw/';
+data_dir = '../../dataRaw/final/Young/';
 
 % Here we define all subjects that we are going to analyze
-subjects = {'MO' 'NS' 'TF'};
+subjects = {'A' 'B' 'C' 'D' 'E' 'G' 'H' 'I' 'J'};
 
 
 % Loop through subjects
@@ -68,7 +68,7 @@ for su = 1 : length(subjects)
             if strcmpi(C{7}, ['START_RUN_' num2str(Exp.rnd_idxs(run_idx))])
                 disp('Behavioral and eye data match for this run')
             else
-                disp('Behavioral and eye data DO NOT MATCH for this run')
+                disp('Behavioral and eye data DO [data_dir subjects{su} ]NOT MATCH for this run')
                 keyboard
             end               
             bk_idx = 0; % set block index

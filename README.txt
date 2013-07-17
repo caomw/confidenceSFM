@@ -13,3 +13,9 @@ srcPres/ -> SCRIPTS TO RUN THE EXPERIMENT:
 		- 'initializeScreen.m': sets the default parameters to open the main window for the experiment.
 		- 'setConstants.m' & 'setParamsSFM.m': adjust experimental parameters.
 		- 'run_SFM.m': MAIN FILE. Runs the experiment.
+
+scrPres/analysis/
+
+		- analysis_collect_eyeData: gets the raw data and read all trials for all sunjects into a matrix
+		- 
+		-

@@ -8,7 +8,7 @@ function TotalMatrix = main
 % I've added a new folder called 'analysis' inside scrPres. We'll put this 
 % code (and other analysis codes) there. You should create the folder and
 % move this script there for the function main to work
-data_dir = '../../dataRaw/'; 
+data_dir = '../../dataRaw/final/Young'; 
 
  % Here we define all subjects that we are going to analyze
 subjects = {'MO.mat' 'NS.mat' 'TF.mat'};
