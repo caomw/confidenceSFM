@@ -16,6 +16,13 @@ srcPres/ -> SCRIPTS TO RUN THE EXPERIMENT:
 
 scrPres/analysis/
 
-		- analysis_collect_eyeData: gets the raw data and read all trials for all sunjects into a matrix
-		- 
-		-
+		1- analysis_collect_eyeData: gets the raw data and read all trials for all sunjects into a matrix
+		2- analysis_eyeData: collects all runs for each subject, collects all data across subjects, Analyze and plot behavioral and eye data 
+		
+
+%% To Do
+
+Then adjust analysis_eyeData and run the graphs. Create the matrix for Megan
+
+
+

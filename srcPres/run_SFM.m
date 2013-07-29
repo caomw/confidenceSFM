@@ -169,6 +169,7 @@ try
         % Trigger the beginning of the block
         if Exp.SFM.trackEye
             runStart = iViewX('message', Exp.ivx, ['START_RUN_' num2str(Exp.rnd_idxs(rn))]);
+            WaitSecs(0.2)
         end
         
         for blk = 1 : nBlocks
@@ -176,6 +177,7 @@ try
             % Trigger the beginning of the block
             if Exp.SFM.trackEye
                 blockStart = iViewX('message', Exp.ivx, ['START_BK_' num2str(blk)]);
+                WaitSecs(0.2)
             end
             
             for trial = 1 : Exp.Run(rn).block(blk).nTrials
@@ -232,6 +234,7 @@ try
                     if iFrame == 1
                         if Exp.SFM.trackEye
                             trialstart = iViewX('message', Exp.ivx, 'END_TR');
+                            WaitSecs(0.2)
                         end
                     end
                 end
@@ -240,6 +243,7 @@ try
                 if Exp.SFM.trackEye
                     if Exp.Run(rn).block(blk).interStimInterval == 0
                         trialstart = iViewX('message', Exp.ivx, 'END_TR');
+                        WaitSecs(0.2)
                     end
                 end
             end
@@ -247,6 +251,7 @@ try
             % Trigger the end of the block
             if Exp.SFM.trackEye
                 blockEnd = iViewX('message', Exp.ivx, ['END_BK_' num2str(blk)]);
+                WaitSecs(0.2)
             end
             
             % Show screen for inter trial inteval
@@ -274,6 +279,7 @@ try
         % Trigger the end of the run
         if Exp.SFM.trackEye
             runEnd = iViewX('message', Exp.ivx, ['END_RUN_' num2str(Exp.rnd_idxs(rn))]);
+            WaitSecs(0.2)
         end
         
         
